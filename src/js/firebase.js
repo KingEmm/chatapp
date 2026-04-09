@@ -6,7 +6,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB4aWoPmfoJ4SUmAIGZRLi8NwLBfFLH6D8",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "chatapi-2afc2.firebaseapp.com",
   databaseURL: "https://chatapi-2afc2-default-rtdb.firebaseio.com",
   projectId: "chatapi-2afc2",
@@ -16,6 +16,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+
 export const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app)
