@@ -75,12 +75,12 @@ document.querySelector('form').addEventListener('submit', (e)=>{
     if(logedIn){
         let authorisation =  new Auth()
         authorisation.login(auth, email.value, password.value)
-        new Auth().isAuthenticated(auth, '/login/index.html')
+        new Auth().isAuthenticated(auth, '/chat/index.html')
     }
     else{
         let authorisation =  new Auth()
         authorisation.signUp(auth, email.value, password.value)
-        new Auth().isAuthenticated(auth, '/login/index.html')
+        new Auth().isAuthenticated(auth, '/chat/index.html')
     }
 
 })
