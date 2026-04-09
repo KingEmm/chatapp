@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, var(--bg), var(--accent-border));
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    color: var(--text-h);
+    font-family: 'Rubik', Arial, Helvetica, sans-serif;
+}
+
+h2{
+    text-align: center;
+    margin: .4rem;
+}
+
+.auth-container{
+    background-color: rgba(22, 22, 22, .1);
+    border: 1px solid var(--text);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    padding-top: 0;
+    border-radius: 10px;
+    width: 40%;
+    height: 100%;
+    box-shadow: var(--shadow);
+    @media screen and (max-width: 1000px) {
+        width: 50%;    
+    }
+    
+    @media screen and (max-width: 650px) {
+        width: 80%;    
+    }
+}
+
+.bt-toggle{
+    margin-bottom: 2rem;
+    margin-top: .5rem;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--accent);
+    width: 70%;
+    margin: .5rem auto 1.5rem;
+
+    & .bt{
+        height: 100%;
+        text-align: center;
+        transition: all .5s;
+        padding: .6rem 0;
+        width: 45%;
+        border-radius: 10px;
+        cursor: pointer;
+        &.active{
+            background-color: var(--accent);
+            width: 55%;
+        }
+    }
+}
+
+input{
+    font-size: 1rem;
+    max-width: 450px;
+    height: 2rem;
+    outline: none;
+    border-bottom: 2px solid var(--text-h);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: none;
+    color: var(--text-h);
+}
+
+.form-group{
+    width: 100%;
+    display: grid;
+    margin-bottom: 1rem;
+}
+
+button{
+    appearance: none;
+    background-color: transparent;
+    color: var(--text-h);
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    font-weight: bolder;
+    border-radius: .4rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    border: 2px solid var(--accent);
+    &:hover{
+        background-color: var(--accent);
+    }
+}
+
+a{
+    color: var(--shadow);
+    text-decoration: none;
+}
+
+.err-msg{
+    background-color: var(--white);
+    color: var(--grey);
+    padding: .5rem;
+    border-radius: .5rem;
+    border: 1px solid red;
+    max-width: 100%;
+}
+
+label{
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+}
+
+.btns{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  & .btn{
+    transition: all .5s;
+  }
+}

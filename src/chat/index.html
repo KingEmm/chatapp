@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=optional" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>chatapp</title>
+  </head>
+  <body>
+    <div id="app">
+      <main>
+        <header>
+          <h1>Username</h1>
+          <button class="btn">Logout</button>
+        </header>
+        <section>
+          <div class="msg-container">
+            <input class="input" id="msg" type="text" placeholder="Enter a message">
+            <button class="btn">Send</button>
+          </div>
+        </section>
+      </main>
+      <aside>
+        <section class="info">
+          <div class="as-heading">
+            <img loading="lazy" src="../assets/vite.svg" alt="Logo" width="30" height="30">
+            <h2>Chat APP</h2>
+          </div>
+          <div class="search">
+            <input class="input" type="text" placeholder="Search">
+            <img loading="lazy" src="../assets/search.svg" alt="Search Icon" width="30" height="30">
+          </div>
+        </section>
+        <section class="recent_chats">
+          <ul>
+            <li class="active">Ekonice</li>
+            <li>Baddo</li>
+            <li>Reminise</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>

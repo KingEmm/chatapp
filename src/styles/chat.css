@@ -1,0 +1,205 @@
+
+html {
+  height: 100%;
+}
+
+body{
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, var(--accent), var(--accent-border));
+    @media (max-width: 900px) {
+        /* width: 100%; */
+    }
+    @media (max-width: 500px) {
+        /* width: 100%; */
+    }
+}
+
+#app{
+    display: flex;
+    width: 90%;
+    height: 80%;
+    margin: 5% 5%;
+    flex-direction: row-reverse;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: var(--bg);
+    overflow: hidden;
+    @media (max-width: 900px) {
+    }
+    @media (max-width: 500px) {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        position: relative;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+main{
+    width: 80%;
+    height: 100%;
+    & header{
+        border-bottom: 1px solid var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 15%;
+
+        & button{
+            padding: .5rem .7rem;
+            font-weight: bold;
+            background-color: var(--accent-bg);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            transition: all .5s;
+            &:hover{
+                background: var(--accent);
+                color: var(--bg);
+                cursor: pointer;
+            }
+        }
+    }
+
+    & section{
+        width: 100%;
+        height: 85%;
+        position: relative;
+        & .msg-container{
+            box-sizing: border-box;
+            background: var(--accent-bg);
+            width: 100%;
+            height: 13%;
+            position: absolute;
+            bottom: 0%;
+            left: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 5%;
+            border-top: 1px solid var(--text);
+            & input{
+                width: 65%;
+                font-size: 1rem;
+                padding-left: 1rem;
+            }
+            & button{
+                border: none;
+                width: 25%;
+                /* padding: 5px 10px; */
+                background-color: var(--accent);
+                font-size: 1rem;
+                box-sizing: border-box;
+                cursor: pointer;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.input{
+    appearance: none;
+    outline: none;
+    border: 1px solid var(--text);
+    border-radius: 5px;
+    background-color: var(--bg);
+    color: var(--text-h);
+}
+
+.btn{
+    border-radius: 5px;
+    outline: none;
+    appearance: unset;
+}
+
+aside{
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid var(--text-h);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg);
+    @media (max-width: 1000px) {
+        width: 40%;
+    }
+    @media (max-width: 500px) {
+        height: 100%;
+        margin: 0;
+        width: 80%;
+        position: absolute;
+        /* background-color: red; */
+        left: 0;
+        top: 0;
+        transition: all .5s;
+    }
+    & .info{
+        height: 20%;
+        background-color: var(--accent-bg);
+        & .as-heading{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70%;
+        }
+        & .search{
+            width: 80%;
+            height: 25%;
+            margin: 0 auto;
+            position: relative;
+            & input{
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding-left: 1.7rem;
+            }
+            & img{
+                /* z-index: 0; */
+                position: absolute;
+                top: -2px;
+                left: 4px;
+                width: 1.3rem;
+            }
+        }
+    }
+    & .recent_chats{
+        height: 80%;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        & ul{
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            /* width: 100%; */
+            height: 100%;
+            list-style-type: none;
+            text-align: center;
+            color: var(--text-h);
+            &::-webkit-scrollbar{
+                display: none;
+            }
+            & li{
+                border-top: 1px solid var(--text);
+                padding: .5rem;
+                transition: all .5s;
+                &:hover{
+                    background-color: var(--accent-bg);
+                }
+
+                &.active{
+                    background-color: var(--accent-border);
+                }
+            }
+
+        }
+    }
+}
