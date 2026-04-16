@@ -1,68 +1,102 @@
-import { getAuth } from "firebase/auth";
 import '../styles/style.css'
 import '../styles/chat.css'
-import javascriptLogo from '../assets/javascript.svg'
-import viteLogo from '../assets/vite.svg'
-import heroImg from '../assets/hero.png'
-import { setupCounter } from './counter.js'
-import { Auth } from './AuthServices.mjs'
-import { app } from './firebase.js'
+// import { vite.svg }
+import { Chat } from './ChatServices.mjs'
+import { Auth } from './AuthServices.mjs';
+import { errorMsg, getAndDisplay, loadMsg } from './utils';
 
-let auth = getAuth(app);
+const auth = new Auth();
 
-new Auth().isNotAuthenticated(auth)
+if(!auth.isAuthenticated())
+    window.location.href = '/'
 
-// document.querySelector('#app').innerHTML = ` 
-// <section id="center">
-//   <div class="hero">
-//     <img src="${heroImg}" class="base" width="170" height="179">
-//     <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-//     <img src=${viteLogo} class="vite" alt="Vite logo" />
-//   </div>
-//   <div>
-//     <h1>Get started</h1>
-//     <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-//   </div>
-//   <button id="counter" type="button" class="counter"></button>
-// </section>
 
-// <div class="ticks"></div>
+document.querySelector('#app').innerHTML = `
+    <main>
+        <header>
+          <h1>Username</h1>
+          <button id="logout" class="btn">Logout</button>
+        </header>
+        <section>
+          <div class="msgs-container">
 
-// <section id="next-steps">
-//   <div id="docs">
-//     <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-//     <h2>Documentation</h2>
-//     <p>Your questions, answered</p>
-//     <ul>
-//       <li>
-//         <a href="https://vite.dev/" target="_blank">
-//           <img class="logo" src=${viteLogo} alt="" />
-//           Explore Vite
-//         </a>
-//       </li>
-//       <li>
-//         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//           <img class="button-icon" src="${javascriptLogo}" alt="">
-//           Learn more
-//         </a>
-//       </li>
-//     </ul>
-//   </div>
-//   <div id="social">
-//     <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-//     <h2>Connect with us</h2>
-//     <p>Join the Vite community</p>
-//     <ul>
-//       <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-//       <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-//       <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-//       <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-//     </ul>
-//   </div>
-// </section>
+          </div>
+          <div class="msg-container">
+            <input class="input" id="msg" type="text" placeholder="Enter a message">
+            <button id='send_btn' class="btn">Send</button>
+          </div>
+        </section>
+      </main>
+      <aside>
+        <section class="info">
+          <div class="as-heading">
+            <img loading="lazy" src="../assets/vite.svg" alt="Logo" width="30" height="30">
+            <h2>Chat APP</h2>
+          </div>
+          <div class="search">
+            <input class="input" type="text" placeholder="Search">
+            <img loading="lazy" src="../assets/search.svg" alt="Search Icon" width="30" height="30">
+          </div>
+        </section>
+        <section class="recent_chats">
+          <ul>
+            <li class="active">Ekonice</li>
+            <li>Baddo</li>
+            <li>Reminise</li>
+          </ul>
+        </section>
+        <a class="add_people" href="/people/index.html">ADD</a>
+      </aside>
+`
 
-// <div class="ticks"></div>
-// <section id="spacer"></section>
-// `
+let chat = new Chat()
 
-// setupCounter(document.querySelector('#counter'))
+let messages = [];
+
+let recent_chats = document.querySelector('.recent_chats ul')
+let msg_container = document.querySelector('.msgs-container')
+document.querySelector('#logout').addEventListener('click', ()=> {
+  new Auth().logout()
+  window.location.href = '/';
+})
+
+let friends = chat.getAllUsers()
+getAndDisplay(await friends, recent_chats)
+
+let active_chat = sessionStorage.getItem('active_chat') || null;
+
+if(active_chat != null){
+  document.querySelector(`#${active_chat}`).classList.add('active');
+}
+
+if(await friends != []){
+  recent_chats.addEventListener('click', async(e)=>{
+      (active_chat != null)? document.querySelector(`#${active_chat}`).classList.remove('active'): console.log('No active chat.');
+        msg_container.innerHTML = '';
+        let ele = e.target.closest('li')
+        ele.classList.add('active')
+        sessionStorage.setItem('active_chat', ele.id)
+        active_chat = ele.id;
+        await chat.openChat(ele.id);
+        messages = await chat.fetchMessages(sessionStorage.getItem('currentChatId'));
+        loadMsg(messages, msg_container)
+        // alert(ele.id)
+    })
+    if(active_chat != null){
+      const send_btn = document.querySelector('#send_btn')
+
+      send_btn.addEventListener('click', async()=>{
+        const input = document.querySelector('#msg')
+        if(input.value.trimStart().trimEnd() != ''){
+          await chat.sendMessage(sessionStorage.getItem('currentChatId'), input.value)
+          input.value='';
+          await chat.fetchMessages(sessionStorage.getItem('currentChatId'));
+        }
+        else{
+          errorMsg(document.querySelector('body'), 'Enter a valid message before sending', 'hi')
+        }
+      })
+    }
+}
+
+console.log(messages)

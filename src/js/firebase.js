@@ -5,18 +5,18 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "chatapi-2afc2.firebaseapp.com",
   databaseURL: "https://chatapi-2afc2-default-rtdb.firebaseio.com",
-  projectId: "chatapi-2afc2",
+  projectId: import.meta.env.VITE_PROJECT_ID,//"chatapi-2afc2",
   storageBucket: "chatapi-2afc2.firebasestorage.app",
-  messagingSenderId: "1076406940514",
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,//"1076406940514",
   appId: "1:1076406940514:web:a84d3daf99fe4225aa723b"
 };
 
 // Initialize Firebase
 
-export const app = initializeApp(firebaseConfig);
+// export const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app)
+// export const db = getFirestore(app)

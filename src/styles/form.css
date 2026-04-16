@@ -65,6 +65,7 @@ h2{
         border-radius: 10px;
         cursor: pointer;
         &.active{
+            color: var(--border);
             background-color: var(--accent);
             width: 55%;
         }
@@ -75,13 +76,13 @@ input{
     font-size: 1rem;
     max-width: 450px;
     height: 2rem;
-    outline: none;
     border-bottom: 2px solid var(--text-h);
     border-top: none;
     border-left: none;
     border-right: none;
     background: none;
-    color: var(--text-h);
+    /* color: var(--text-h); */
+    padding-left: .3rem;
 }
 
 .form-group{
@@ -91,19 +92,22 @@ input{
 }
 
 button{
-    appearance: none;
     background-color: transparent;
-    color: var(--text-h);
+    color: var(--accent);
     padding: .5rem 1rem;
     font-size: 1rem;
     font-weight: bolder;
-    border-radius: .4rem;
     margin-top: 1rem;
     cursor: pointer;
     font-family: 'Rubik', sans-serif;
     border: 2px solid var(--accent);
+    &:hover .loading{
+        border-top: 2px solid var(--bg);
+        border-bottom: 2px solid var(--bg);
+    }
     &:hover{
         background-color: var(--accent);
+        color: var(--border);
     }
 }
 
