@@ -78,23 +78,29 @@ if(await friends != []){
         sessionStorage.setItem('active_chat', ele.id)
         active_chat = ele.id;
         await chat.openChat(ele.id);
-        messages = await chat.fetchMessages(sessionStorage.getItem('currentChatId'));
-        loadMsg(messages, msg_container)
+        messages = await chat.fetchMessages(sessionStorage.getItem('currentChatId'), msg_container);
+        await loadMsg(messages, msg_container)
         // alert(ele.id)
     })
     if(active_chat != null){
       const send_btn = document.querySelector('#send_btn')
 
       send_btn.addEventListener('click', async()=>{
+        send_btn.disabled = true;
         const input = document.querySelector('#msg')
         if(input.value.trimStart().trimEnd() != ''){
+          console.log('sent')
           await chat.sendMessage(sessionStorage.getItem('currentChatId'), input.value)
           input.value='';
-          await chat.fetchMessages(sessionStorage.getItem('currentChatId'));
+          messages = await loadMsg(await chat.fetchMessages(sessionStorage.getItem('currentChatId'), msg_container), msg_container);
+          // await loadMsg(messages, msg_container)
+          send_btn.disabled = false;
         }
         else{
           errorMsg(document.querySelector('body'), 'Enter a valid message before sending', 'hi')
+          send_btn.disabled = false;
         }
+        // send_btn.disabled = false;
       })
     }
 }

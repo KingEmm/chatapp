@@ -11,11 +11,11 @@ export async function get(url){
 }
 
 export function errorMsg(selector, msg, type = 'error'){
-    const msgBox = document.querySelector('.err_active')
-    // msgBox.classList.add('err_active')
+    const msgBox = document.createElement('div')
+    msgBox.classList.add('err_active')
+    selector.appendChild(msgBox);
     msgBox.textContent= msg;
     msgBox.style.opacity= 1;
-    // selector.appendChild(msgBox);
     
     let timeout = null;
     let count = 0;
@@ -23,8 +23,8 @@ export function errorMsg(selector, msg, type = 'error'){
         count++
         if(count >= 5){
             msgBox.style.opacity= 0;
-            msgBox.textContent= '';
-            // selector.removeChild(msgBox);
+            // msgBox.textContent= '';
+            selector.removeChild(msgBox);
             clearInterval(timeout);
         }
     }, 1000)
@@ -35,6 +35,7 @@ export function loader(selector, loading){
     let loadEle = document.createElement('div')
     loadEle.classList.add('loading')
     if(loading){
+        selector.classList.add('.center')
         selector.disabled=loading;
         selector.style.cursor = 'not-allowed'
         selector.innerHTML = '';
@@ -44,6 +45,7 @@ export function loader(selector, loading){
         selector.style.cursor = 'pointer'
         selector.disabled = loading;
         selector.innerHTML = document.querySelector('.active').textContent;
+        selector.classList.remove('.center')
         // selector.removeChild(document.querySelector('.loading'));
 
     }

@@ -67,10 +67,10 @@
   border: 2px solid rgb(255, 66, 66);
   color: var(--text);
   width: 80%;
-  padding: .6rem;
+  padding: .3rem;
   background-color: rgb(255, 66, 66, .3);/*var(--accent-border);*/
   position: absolute;
-  top: 5%;
+  top: 2%;
   right: 10%;
   box-shadow: var(--shadow);
   border-radius: 5px;
@@ -78,6 +78,7 @@
   opacity: 0;
   /* display: none; */
   transition: all 1s;
+  z-index: 100;
 }
 
 .loading{
@@ -115,6 +116,12 @@
   margin-right: 50%;
   text-align: left;
   background-color: var(--accent);
+}
+
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes spin {

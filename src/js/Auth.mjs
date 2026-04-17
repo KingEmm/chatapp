@@ -80,16 +80,16 @@ toggle.addEventListener('click', (e)=>{
 })
 
 
-document.querySelector('form').addEventListener('submit', (e)=>{
+document.querySelector('form').addEventListener('submit', async (e)=>{
     e.preventDefault();
     // e.cancelable = true;
     // loader(document.querySelector('.btn'), true)
     
-    new Auth().authenticate(logedIn, email.value, password.value)
-    window.location.href = '/chat/index.html'
-
-    // if(new Auth().isAuthenticated()){
-    // }
+    await new Auth().authenticate(logedIn, email.value, password.value)
+    
+    if(new Auth().isAuthenticated()){
+        window.location.href = '/chat/index.html'
+    }
 
     // loader(document.querySelector('.btn'), false)
 

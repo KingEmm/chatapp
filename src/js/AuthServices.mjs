@@ -18,23 +18,23 @@ export class Auth{
 
     isAuthenticated(){
         // console.log(localStorage.getItem('token'))
-        return localStorage.getItem('token') !== null && localStorage.getItem('token') !== undefined;
+        return localStorage.getItem('token') !== null && localStorage.getItem('token') !== undefined && localStorage.getItem('refreshToken') !== null;
     }
-    isNotAuthenticated(auth=this.auth){
-        onAuthStateChanged(auth, (user)=>{
-            if(!user){
-                // console.log(user.uid);
-                window.location.href = '/'
+    // isNotAuthenticated(auth=this.auth){
+    //     onAuthStateChanged(auth, (user)=>{
+    //         if(!user){
+    //             // console.log(user.uid);
+    //             window.location.href = '/'
                 
-            }
-            else{
-                // window.location.href = '/'
-                console.log(user.uid);
-                // return false;
-            }
-        })
-        // return isAuth;
-    }
+    //         }
+    //         else{
+    //             // window.location.href = '/'
+    //             console.log(user.uid);
+    //             // return false;
+    //         }
+    //     })
+    //     // return isAuth;
+    // }
 
     // async login(_auth = this.auth, _email = this.email, _password=this.password) {
 
@@ -113,7 +113,7 @@ export class Auth{
                 body: JSON.stringify({
                     refreshToken: refreshToken
                 })
-            });
+        });
 
         const data = await response.json();
 
@@ -129,11 +129,14 @@ export class Auth{
         );
 
         return data.idToken;
-        }
+    }
     
     logout() {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("uid");
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("uid");
         window.location.href = "/login.html";
     }
 
