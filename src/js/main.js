@@ -4,7 +4,8 @@ import '../styles/chat.css'
 import { Chat } from './ChatServices.mjs'
 import { Auth } from './AuthServices.mjs';
 import { errorMsg, getAndDisplay, loadMsg } from './utils';
-import logo from '../assets/vite.svg'; 
+import logo from '../assets/vite.svg';
+import search from '../assets/search.svg';
 
 const auth = new Auth();
 
@@ -39,7 +40,7 @@ document.querySelector('#app').innerHTML = `
           </div>
           <div class="search">
             <input class="input" type="text" placeholder="Search">
-            <img loading="lazy" src="../assets/search.svg" alt="Search Icon" width="30" height="30">
+            <img loading="lazy" src="${search}" alt="Search Icon" width="30" height="30">
           </div>
         </section>
         <section class="recent_chats">
