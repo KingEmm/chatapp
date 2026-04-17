@@ -13,7 +13,10 @@ if(!auth.isAuthenticated())
 
 document.querySelector('#app').innerHTML = `
     <main>
+        <div class='modal'>
+        </div>
         <header>
+          <button id="open-menu" class="btn">&#9776;</button>
           <h1>Username</h1>
           <button id="logout" class="btn">Logout</button>
         </header>
@@ -52,9 +55,23 @@ document.querySelector('#app').innerHTML = `
 let chat = new Chat()
 
 let messages = [];
-
 let recent_chats = document.querySelector('.recent_chats ul')
 let msg_container = document.querySelector('.msgs-container')
+let aside = document.querySelector('aside')
+let modal = document.querySelector('.modal')
+
+document.querySelector('#open-menu').addEventListener('click', ()=>{
+  aside.style.display = 'block';
+  modal.style.display = 'block';
+})
+
+modal.addEventListener('click', ()=>{
+  aside.style.display = 'none'
+  modal.style.display = 'none'
+})
+
+// var messageBody = document.querySelector('#messageBody');
+
 document.querySelector('#logout').addEventListener('click', ()=> {
   new Auth().logout()
   window.location.href = '/';
@@ -78,7 +95,7 @@ if(await friends != []){
         sessionStorage.setItem('active_chat', ele.id)
         active_chat = ele.id;
         await chat.openChat(ele.id);
-        messages = await chat.fetchMessages(sessionStorage.getItem('currentChatId'), msg_container);
+        messages = await chat.fetchMessages(sessionStorage.getItem('currentChatId'), msg_container, true);
         await loadMsg(messages, msg_container)
         // alert(ele.id)
     })
@@ -104,5 +121,15 @@ if(await friends != []){
       })
     }
 }
+setTimeout(()=>{
+  msg_container.scrollTop = msg_container.scrollHeight - msg_container.clientHeight;
+}, 6000)
+
+
+setInterval(async() => {
+  // alert(20)
+  messages = await loadMsg(await chat.fetchMessages(sessionStorage.getItem('currentChatId'), msg_container), msg_container);
+
+}, 5000);
 
 console.log(messages)

@@ -92,8 +92,9 @@ export class Chat{
         }
     }
 
-    async fetchMessages(chatId, selector=document.querySelector('body')) {
-        loader(selector, true)
+    async fetchMessages(chatId, selector=document.querySelector('body'), doLike=false) {
+        if(doLike)
+            loader(selector, true)
         try {
             const token = await new Auth().getValidToken();
             
@@ -109,14 +110,16 @@ export class Chat{
 
             const messages = await response.json();
             console.log(messages);
-            loader(selector, false)
+            if(doLike)
+                loader(selector, false)
             return messages;
             
         } catch (error) {
             loader(selector, false)
             console.error("Failed to fetch messages:", error);
         }
-        loader(selector, false)
+        if(doLike)
+            loader(selector, false)
     }
 
 }

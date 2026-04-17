@@ -77,6 +77,7 @@ export class Auth{
             localStorage.setItem("refreshToken", data.refreshToken);
             localStorage.setItem("expiresAt", data.expiresIn);
             localStorage.setItem("uid", data.localId);
+            // localStorage.setItem("email", email);
         }catch(error){
             // alert(error)
             const selector= document.querySelector('body');

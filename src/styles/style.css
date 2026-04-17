@@ -124,6 +124,10 @@
   justify-content: center;
 }
 
+.show{
+  display: block;
+}
+
 @keyframes spin {
   from{
     transform: rotate(0);
