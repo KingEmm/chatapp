@@ -86,10 +86,10 @@ document.querySelector('form').addEventListener('submit', (e)=>{
     // loader(document.querySelector('.btn'), true)
     
     new Auth().authenticate(logedIn, email.value, password.value)
+    window.location.href = '/chat/index.html'
 
-    if(new Auth().isAuthenticated()){
-        window.location.href = '/chat/index.html'
-    }
+    // if(new Auth().isAuthenticated()){
+    // }
 
     // loader(document.querySelector('.btn'), false)
 
