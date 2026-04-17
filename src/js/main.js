@@ -4,6 +4,7 @@ import '../styles/chat.css'
 import { Chat } from './ChatServices.mjs'
 import { Auth } from './AuthServices.mjs';
 import { errorMsg, getAndDisplay, loadMsg } from './utils';
+import logo from '../assets/vite.svg'; 
 
 const auth = new Auth();
 
@@ -33,7 +34,7 @@ document.querySelector('#app').innerHTML = `
       <aside>
         <section class="info">
           <div class="as-heading">
-            <img loading="lazy" src="../assets/vite.svg" alt="Logo" width="30" height="30">
+            <img loading="lazy" src="${logo}" alt="Logo" width="30" height="30">
             <h2>Chat APP</h2>
           </div>
           <div class="search">

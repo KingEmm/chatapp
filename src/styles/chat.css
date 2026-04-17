@@ -28,7 +28,11 @@ body{
     top: 0;
     left: 0;
     z-index: 10;
-    /* display: none; */
+    display: none;
+    @media (max-width: 500px) {
+        display: block;
+    }
+
 }
 
 #app{
