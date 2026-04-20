@@ -45,9 +45,6 @@ document.querySelector('#app').innerHTML = `
         </section>
         <section class="recent_chats">
           <ul>
-            <li class="active">Ekonice</li>
-            <li>Baddo</li>
-            <li>Reminise</li>
           </ul>
         </section>
         <a class="add_people" href="/people/index.html">ADD</a>
@@ -71,6 +68,10 @@ modal.addEventListener('click', ()=>{
   aside.style.display = 'none'
   modal.style.display = 'none'
 })
+
+let req = new URLSearchParams(window.location.search);
+
+console.log(req.get('data'));
 
 // var messageBody = document.querySelector('#messageBody');
 

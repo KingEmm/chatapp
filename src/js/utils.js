@@ -51,10 +51,10 @@ export function loader(selector, loading){
     }
 }
 
-export async function getAndDisplay(arr=[], selector=document.querySelector('.recent_chats ul')){
+export async function getAndDisplay(arr=[], selector=document.querySelector('.recent_chats ul'), eleTyp='li'){
     selector.innerHTML='';
     arr.forEach( item => {
-        const ele = document.createElement('li');
+        const ele = document.createElement(eleTyp);
         ele.id = item.id;
         ele.textContent = item.email;
         selector.appendChild(ele);
